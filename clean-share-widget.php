@@ -24,6 +24,10 @@ class wp_clean_share_widget_plugin extends WP_Widget {
                 $title = esc_attr( $instance['title'] );
                 $twitter_account = esc_attr($instance['twitter_account']);
                 $icon_color = esc_attr($instance['icon_color']);
+                $use_twitter = esc_attr($instance['use_twitter']);
+                $use_facebook = esc_attr($instance['use_facebook']);
+                $use_google_plus = esc_attr($instance['use_google_plus']);
+                $use_pinterest = esc_attr($instance['use_pinterest']);
 
                 // remove first character if it's an '@'
                 if ( $twitter_account[0] == '@' ) {
@@ -33,6 +37,10 @@ class wp_clean_share_widget_plugin extends WP_Widget {
             $title = '';
             $twitter_account = '';
             $icon_color = "light";
+            $use_twitter = true;
+            $use_facebook = true;
+            $use_google_plus = true;
+            $use_pinterest = true;
         }
         ?>
         <div class="wrap">
@@ -49,6 +57,13 @@ class wp_clean_share_widget_plugin extends WP_Widget {
                     Light or dark icons?<br />
                     <input id="<?php echo $this->get_field_id('light_icons'); ?>" name="<?php echo $this->get_field_name('icon_type'); ?>" type="radio" value="light" <?php if ( $icon_color == 'light' ): echo 'checked="checked"'; endif; ?> /><label for="<?php echo $this->get_field_id('light_icons'); ?>">Light Icons</label>
                     <input id="<?php echo $this->get_field_id('dark_icons'); ?>" name="<?php echo $this->get_field_name('icon_type'); ?>" type="radio" value="dark" <?php if ( $icon_color == 'dark' ): echo 'checked="checked"'; endif; ?> /><label for="<?php echo $this->get_field_id('dark_icons'); ?>">Dark Icons</label>
+                </li>
+                <li>
+                    Choose Social Networks:<br />
+                    <input id="<?php echo $this->get_field_id('use_twitter'); ?>" name="<?php echo $this->get_field_name('use_twitter'); ?>" type="checkbox" <?php if ( $use_twitter ): echo 'checked="checked"'; endif; ?> /><label for="<?php echo $this->get_field_id('use_twitter'); ?>">Twitter</label><br />
+                    <input id="<?php echo $this->get_field_id('use_facebook'); ?>" name="<?php echo $this->get_field_name('use_facebook'); ?>" type="checkbox" <?php if ( $use_facebook ): echo 'checked="checked"'; endif; ?> /><label for="<?php echo $this->get_field_id('use_facebook'); ?>">Facebook</label><br />
+                    <input id="<?php echo $this->get_field_id('use_google_plus'); ?>" name="<?php echo $this->get_field_name('use_google_plus'); ?>" type="checkbox" <?php if ( $use_google_plus ): echo 'checked="checked"'; endif; ?> /><label for="<?php echo $this->get_field_id('use_google_plus'); ?>">Facebook</label><br />
+                    <input id="<?php echo $this->get_field_id('use_pinterest'); ?>" name="<?php echo $this->get_field_name('use_pinterest'); ?>" type="checkbox" <?php if ( $use_pinterest ): echo 'checked="checked"'; endif; ?> /><label for="<?php echo $this->get_field_id('use_pinterest'); ?>">Facebook</label>
                 </li>
             </ul>
         </div>
