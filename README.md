@@ -1,5 +1,5 @@
-clean-share-widget
-==================
+Clean Social Share Widget
+=========================
 A fast and JavaScript-free share widget for WordPress. 
 
 I am sick of social share widgets doubling the time it takes my site to load. These are pure HTML/CSS and will not slow down site load.
@@ -24,6 +24,7 @@ Future
 * Choose your own icons
 * Allow disabling of unwanted social networks in widget admin
 * Add share via email and any other social networks that allow sharing without JavaScript
+* Pull featured image (or first image if no featured image) in to Pinterest pin
 
 
 Distant Future
