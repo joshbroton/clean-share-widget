@@ -11,14 +11,14 @@ License: GPL2
 
 class wp_clean_share_widget_plugin extends WP_Widget {
 
-	// constructor
-	function wp_my_plugin() {
-		parent::WP_Widget(false, $name = __('Clean Share Widget', 'wp_widget_plugin') );
-	}
+    // constructor
+    public function __construct() {
+        parent::WP_Widget(false, $name = __('Clean Share Widget', 'wp_widget_plugin') );
+    }
 
-	// widget form creation
-	function form($instance) {	
-		// Check values
+    // widget form creation
+    public function form($instance) {
+        // Check values
         if( $instance ) {
                 // Set variables from properties inputs
                 $title = esc_attr( $instance['title'] );
@@ -41,24 +41,30 @@ class wp_clean_share_widget_plugin extends WP_Widget {
                 </li>
                 <li>
                     <label for="<?php echo $this->get_field_id('twitter_account'); ?>"><?php _e('"Author" Twitter Account:', 'wp_widget_plugin'); ?></label>
-                    <input class="widefat" id="<?php echo $this->get_field_id('twitter_account'); ?>" name="<?php echo $this->get_field_name('twitter_account'); ?>" type="text" value="<?php echo $text; ?>" />
+                    <input class="widefat" id="<?php echo $this->get_field_id('twitter_account'); ?>" name="<?php echo $this->get_field_name('twitter_account'); ?>" type="text" value="<?php echo $twitter_account; ?>" />
                 </li>
             </ul>
         </div>
         <?php
-	}
+    }
 
-	// widget update
-	function update($new_instance, $old_instance) {
+    // widget update
+    public function update($new_instance, $old_instance) {
         $instance = $old_instance;
         // Fields
         $instance['title'] = strip_tags($new_instance['title']);
-        $instance['twitter_account'] = strip_tags($new_instance['text']);
-        return $instance;
-	}
+        $instance['twitter_account'] = strip_tags($new_instance['twitter_account']);
 
-	// widget display
-	function widget($args, $instance) {
+        // remove first character if it's an '@'
+        if ( $instance['twitter_account'][0] == '@' ) {
+            $instance['twitter_account'] = substr( $instance['twitter_account'], 1) ;
+        }
+
+        return $instance;
+    }
+
+    // widget display
+    public function widget($args, $instance) {
         extract( $args );
         // these are the widget options
         $title = apply_filters('widget_title', $instance['title']);
@@ -67,7 +73,7 @@ class wp_clean_share_widget_plugin extends WP_Widget {
         // Get this post's ID
         $post_id = $GLOBALS['post']->ID;
         $post_url = get_permalink( $post_id );
-        $post_title = get_the_title( $post_id );
+        $post_title = urlencode(get_the_title( $post_id ));
 
         echo $before_widget;
         // Display the widget
@@ -86,10 +92,10 @@ class wp_clean_share_widget_plugin extends WP_Widget {
         }
         echo '</div>';
         echo $after_widget;
-	}
+    }
 }
 
 // register widget
-add_action('widgets_init', create_function('', 'return register_widget("wp_clean_share_widget_plugin");'));
+add_action('widgets_init', function() {register_widget("wp_clean_share_widget_plugin");});
 
 ?>
