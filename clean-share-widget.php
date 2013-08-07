@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Clean Share Widget Plugin
+Plugin Name: Clean Social Share Widget
 Plugin URI: http://github.com/joshbroton/clean-share-widget
 Description: A fast and (mostly) JavaScript-free social share widget.
-Version: 0.0.1
+Version: 0.1
 Author: Josh Broton
 Author URI: http://joshbroton.com
 License: GPL2
@@ -119,15 +119,15 @@ class wp_clean_share_widget_plugin extends WP_Widget {
         echo '<div class="clean-share-links">';
 
         if ($icon_color == 'light') {
-            echo '<a class="wp_widget_plugin_text" target="_blank" href="https://twitter.com/intent/tweet?url=' . $post_url . '&text=%22' . $post_title . '%22&via=' . $twitter_account . '" title="Share to Twitter"><img src="' . plugins_url( 'images/twitter-for-light.png' , __FILE__ ) . '" alt="Share to Twitter" /></a>';
-            echo '<a class="wp_widget_plugin_text" target="_blank" href="https://facebook.com/sharer.php?u=' . $post_url . '" title="Share to Facebook"><img src="' . plugins_url( 'images/facebook-for-light.png' , __FILE__ ) . '" alt="Share to Facebook" /></a>';
-            echo '<a class="wp_widget_plugin_text" target="_blank" href="https://plus.google.com/share?url=' . $post_url . '" title="Share to Google Plus"><img src="' . plugins_url( 'images/google-plus.png' , __FILE__ ) . '" alt="Share to Google Plus" /></a>';
-            echo '<a class="wp_widget_plugin_text" target="_blank" href="http://pinterest.com/pin/create/button/?url=' . $post_url . '&description=' . $post_title . '" title="Pin on Pinterest"><img src="' . plugins_url( 'images/pinterest-for-light.png' , __FILE__ ) . '" alt="Pin on Pinterest" /></a>';
-        } elseif ($icon_color == 'dark') {
             echo '<a class="wp_widget_plugin_text" target="_blank" href="https://twitter.com/intent/tweet?url=' . $post_url . '&text=%22' . $post_title . '%22&via=' . $twitter_account . '" title="Share to Twitter"><img src="' . plugins_url( 'images/twitter-for-dark.png' , __FILE__ ) . '" alt="Share to Twitter" /></a>';
             echo '<a class="wp_widget_plugin_text" target="_blank" href="https://facebook.com/sharer.php?u=' . $post_url . '" title="Share to Facebook"><img src="' . plugins_url( 'images/facebook-for-dark.png' , __FILE__ ) . '" alt="Share to Facebook" /></a>';
             echo '<a class="wp_widget_plugin_text" target="_blank" href="https://plus.google.com/share?url=' . $post_url . '" title="Share to Google Plus"><img src="' . plugins_url( 'images/google-plus.png' , __FILE__ ) . '" alt="Share to Google Plus" /></a>';
             echo '<a class="wp_widget_plugin_text" target="_blank" href="http://pinterest.com/pin/create/button/?url=' . $post_url . '&description=' . $post_title . '" title="Pin on Pinterest"><img src="' . plugins_url( 'images/pinterest-for-dark.png' , __FILE__ ) . '" alt="Pin on Pinterest" /></a>';
+        } elseif ($icon_color == 'dark') {
+            echo '<a class="wp_widget_plugin_text" target="_blank" href="https://twitter.com/intent/tweet?url=' . $post_url . '&text=%22' . $post_title . '%22&via=' . $twitter_account . '" title="Share to Twitter"><img src="' . plugins_url( 'images/twitter-for-light.png' , __FILE__ ) . '" alt="Share to Twitter" /></a>';
+            echo '<a class="wp_widget_plugin_text" target="_blank" href="https://facebook.com/sharer.php?u=' . $post_url . '" title="Share to Facebook"><img src="' . plugins_url( 'images/facebook-for-light.png' , __FILE__ ) . '" alt="Share to Facebook" /></a>';
+            echo '<a class="wp_widget_plugin_text" target="_blank" href="https://plus.google.com/share?url=' . $post_url . '" title="Share to Google Plus"><img src="' . plugins_url( 'images/google-plus.png' , __FILE__ ) . '" alt="Share to Google Plus" /></a>';
+            echo '<a class="wp_widget_plugin_text" target="_blank" href="http://pinterest.com/pin/create/button/?url=' . $post_url . '&description=' . $post_title . '" title="Pin on Pinterest"><img src="' . plugins_url( 'images/pinterest-for-light.png' , __FILE__ ) . '" alt="Pin on Pinterest" /></a>';
         }
         echo '</div></div>';
         echo $after_widget;
