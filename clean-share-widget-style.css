@@ -1,0 +1,24 @@
+.clean-share-links {
+  *zoom: 1; }
+  .clean-share-links:before, .clean-share-links:after {
+    display: table;
+    content: ""; }
+  .clean-share-links:after {
+    clear: both; }
+  .clean-share-links a {
+    display: block;
+    float: left;
+    width: 22%;
+    margin-right: 4%;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+    opacity: 0.8;
+    -webkit-transition: opacity 0.2s ease;
+    -moz-transition: opacity 0.2s ease;
+    -ms-transition: opacity 0.2s ease;
+    -o-transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease; }
+    .clean-share-links a:last-child {
+      margin-right: 0; }
+    .clean-share-links a:hover {
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+      opacity: 1; }

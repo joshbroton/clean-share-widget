@@ -1,0 +1,47 @@
+//mixins from https://github.com/joshbroton/Squeaky/blob/master/scss/_mixins.scss
+
+@mixin clearfix() {
+    *zoom: 1;
+    &:before,
+    &:after {
+        display: table;
+        content: "";
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin transition($transition) {
+    -webkit-transition: $transition;
+    -moz-transition: $transition;
+    -ms-transition: $transition;
+    -o-transition: $transition;
+    transition: $transition;
+}
+
+@mixin opacity($opacity: .5) {
+    filter: unquote("progid:DXImageTransform.Microsoft.Alpha(Opacity=#{round($opacity * 100)})");
+    opacity: $opacity;
+}
+
+.clean-share-links {
+    @include clearfix();
+
+    a {
+        display: block;
+        float: left;
+        width: 22%;
+        margin-right: 4%;
+        @include opacity(.8);
+        @include transition(opacity .2s ease);
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &:hover {
+            @include opacity(1);
+        }
+    }
+}
