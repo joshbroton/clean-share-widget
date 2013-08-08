@@ -195,7 +195,7 @@ class wp_clean_share_widget_plugin extends WP_Widget {
         }
 
         if ( $use_pinterest ) {
-            $widget_content .= '<a class="wp_widget_plugin_text" target="_blank" href="http://pinterest.com/pin/create/button/?url=' . $post_url . '&description=' . $post_title . '" title="Pin on Pinterest"><img src="';
+            $widget_content .= '<a class="wp_widget_plugin_text" target="_blank" href="https://pinterest.com/pin/create/button/?url=' . $post_url . '&description=' . $post_title . '" title="Pin on Pinterest"><img src="';
             if ( $icon_color == 'light' ) {
                 $widget_content .= plugins_url( 'images/pinterest-for-dark.png' , __FILE__ );
             } else {
@@ -217,12 +217,12 @@ class wp_clean_share_widget_plugin extends WP_Widget {
         }
 
         if ( $use_linkedin ) {
-            $widget_content .= '<a class="wp_widget_plugin_text" target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=' . $post_url . '" title="Share on LinkedIn"><img src="' . plugins_url( 'images/linkedin.png' , __FILE__ ) . '" alt="Share on LinkedIn" /></a>';
+            $widget_content .= '<a class="wp_widget_plugin_text" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=' . $post_url . '" title="Share on LinkedIn"><img src="' . plugins_url( 'images/linkedin.png' , __FILE__ ) . '" alt="Share on LinkedIn" /></a>';
             $count++;
         }
 
         if ( $use_digg ) {
-            $widget_content .= '<a class="wp_widget_plugin_text" target="_blank" href="http://digg.com/submit?url=' . $post_url . '" title="Digg This"><img src="';
+            $widget_content .= '<a class="wp_widget_plugin_text" target="_blank" href="https://digg.com/submit?url=' . $post_url . '" title="Digg This"><img src="';
             if ( $icon_color == 'light' ) {
                 $widget_content .= plugins_url( 'images/digg-for-dark.png' , __FILE__ );
             } else {
