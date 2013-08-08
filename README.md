@@ -9,8 +9,13 @@ You lose tracking, but basic tracking will be added in the future (do you really
 License: GPLv2
 
 
-v0.1
-----
+###v0.2
+* Add sharing to email, LinkedIn, Digg, and reddit
+* Users can disable unwanted social networks
+* Update styling to allow for 2+ rows of icons
+
+
+###v0.1
 * Initial functionality and graphics (icons from official Twitter, Facebook, Google+, and Pinterest sites)
 * Allows sharing to Twitter, Facebook, Google+, and Pinterest
 * Set widget title
@@ -18,12 +23,10 @@ v0.1
 * Choose between dark and light themed icons
 
 
-Future
-------
+###Future
 * Pull post author's twitter name if available, otherwise use widget settings
 * Choose your own icons
-* Allow disabling of unwanted social networks in widget admin
-* Add share via email and any other social networks that allow sharing without JavaScript
+* Add share via any other social networks that allow sharing without JavaScript
 * Pull featured image (or first image if no featured image) in to Pinterest pin
 
 
