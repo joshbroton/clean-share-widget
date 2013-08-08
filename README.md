@@ -30,12 +30,10 @@ License: GPLv2
 * Pull featured image (or first image if no featured image) in to Pinterest pin
 
 
-Distant Future
---------------
+###Distant Future
 * Enable basic analytics via POST - store in database and access stats through WordPress admin
 
 
-Tested On
----------
+###Tested On
 * WordPress 3.6
 * WordPress 3.5.2
