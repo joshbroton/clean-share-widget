@@ -10,6 +10,7 @@
     float: left;
     width: 22%;
     margin-right: 4%;
+    margin-bottom: 4%;
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
     opacity: 0.8;
     -webkit-transition: opacity 0.2s ease;
@@ -17,7 +18,7 @@
     -ms-transition: opacity 0.2s ease;
     -o-transition: opacity 0.2s ease;
     transition: opacity 0.2s ease; }
-    .clean-share-links a:last-child {
+    .clean-share-links a:nth-child(4n+4) {
       margin-right: 0; }
     .clean-share-links a:hover {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);

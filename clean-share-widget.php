@@ -45,10 +45,10 @@ class wp_clean_share_widget_plugin extends WP_Widget {
             $use_facebook = true;
             $use_google_plus = true;
             $use_pinterest = true;
-            $use_email = true;
-            $use_linkedin = true;
-            $use_digg = true;
-            $use_reddit = true;
+            $use_email = false;
+            $use_linkedin = false;
+            $use_digg = false;
+            $use_reddit = false;
         }
         ?>
         <div class="wrap">
@@ -70,8 +70,8 @@ class wp_clean_share_widget_plugin extends WP_Widget {
                     Choose Social Networks:<br />
                     <input id="<?php echo $this->get_field_id('use_twitter'); ?>" name="<?php echo $this->get_field_name('use_twitter'); ?>" type="checkbox" <?php if ( $use_twitter ): echo 'checked="checked"'; endif; ?> /><label for="<?php echo $this->get_field_id('use_twitter'); ?>">Twitter</label><br />
                     <input id="<?php echo $this->get_field_id('use_facebook'); ?>" name="<?php echo $this->get_field_name('use_facebook'); ?>" type="checkbox" <?php if ( $use_facebook ): echo 'checked="checked"'; endif; ?> /><label for="<?php echo $this->get_field_id('use_facebook'); ?>">Facebook</label><br />
-                    <input id="<?php echo $this->get_field_id('use_google_plus'); ?>" name="<?php echo $this->get_field_name('use_google_plus'); ?>" type="checkbox" <?php if ( $use_google_plus ): echo 'checked="checked"'; endif; ?> /><label for="<?php echo $this->get_field_id('use_google_plus'); ?>">Facebook</label><br />
-                    <input id="<?php echo $this->get_field_id('use_pinterest'); ?>" name="<?php echo $this->get_field_name('use_pinterest'); ?>" type="checkbox" <?php if ( $use_pinterest ): echo 'checked="checked"'; endif; ?> /><label for="<?php echo $this->get_field_id('use_pinterest'); ?>">Facebook</label><br />
+                    <input id="<?php echo $this->get_field_id('use_google_plus'); ?>" name="<?php echo $this->get_field_name('use_google_plus'); ?>" type="checkbox" <?php if ( $use_google_plus ): echo 'checked="checked"'; endif; ?> /><label for="<?php echo $this->get_field_id('use_google_plus'); ?>">Google+</label><br />
+                    <input id="<?php echo $this->get_field_id('use_pinterest'); ?>" name="<?php echo $this->get_field_name('use_pinterest'); ?>" type="checkbox" <?php if ( $use_pinterest ): echo 'checked="checked"'; endif; ?> /><label for="<?php echo $this->get_field_id('use_pinterest'); ?>">Pinterest</label><br />
                     <input id="<?php echo $this->get_field_id('use_email'); ?>" name="<?php echo $this->get_field_name('use_email'); ?>" type="checkbox" <?php if ( $use_email ): echo 'checked="checked"'; endif; ?> /><label for="<?php echo $this->get_field_id('use_email'); ?>">Email</label><br />
                     <input id="<?php echo $this->get_field_id('use_linkedin'); ?>" name="<?php echo $this->get_field_name('use_linkedin'); ?>" type="checkbox" <?php if ( $use_linkedin ): echo 'checked="checked"'; endif; ?> /><label for="<?php echo $this->get_field_id('use_linkedin'); ?>">LinkedIn</label><br />
                     <input id="<?php echo $this->get_field_id('use_digg'); ?>" name="<?php echo $this->get_field_name('use_digg'); ?>" type="checkbox" <?php if ( $use_digg ): echo 'checked="checked"'; endif; ?> /><label for="<?php echo $this->get_field_id('use_digg'); ?>">Digg</label><br />
@@ -130,6 +130,12 @@ class wp_clean_share_widget_plugin extends WP_Widget {
         $use_digg = $instance['use_digg'];
         $use_reddit = $instance['use_reddit'];
 
+        // Variable used to build content string
+        $widget_content = '';
+
+        // Variable used to store social network count
+        $count = 0;
+
         // Get the page's info
         $post_url = 'http://' . $_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI'];
         $post_title = wp_title( '', false );
@@ -149,10 +155,10 @@ class wp_clean_share_widget_plugin extends WP_Widget {
         }
 
         // urlencode the title
-        $post_title = $post_title;
+        $post_title = urlencode($post_title);
 
-        echo $before_widget;
         // Display the widget
+        echo $before_widget;
         echo '<div class="widget-text wp_widget_plugin_box clean-share-widget-wrapper">';
 
         // Check if title is set
@@ -160,29 +166,80 @@ class wp_clean_share_widget_plugin extends WP_Widget {
             echo $before_title . $title . $after_title;
         }
 
-        // Check if text is set
-        echo '<div class="clean-share-links">';
-
+        // Build content string
         if ( $use_twitter ) {
-            echo '<a class="wp_widget_plugin_text" target="_blank" href="https://twitter.com/intent/tweet?url=' . $post_url . '&text=%22' . $post_title . '%22&via=' . $twitter_account . '" title="Share to Twitter"><img src="' . if ( $icon_color == 'light' ): plugins_url( 'images/twitter-for-dark.png' , __FILE__ ) else plugins_url( 'images/twitter-for-light.png' , __FILE__ ) endif . '" alt="Share to Twitter" /></a>';
+            $widget_content .= '<a class="wp_widget_plugin_text" target="_blank" href="https://twitter.com/intent/tweet?url=' . $post_url . '&text=%22' . $post_title . '%22&via=' . $twitter_account . '" title="Share to Twitter"><img src="';
+            if ($icon_color == 'light') {
+                $widget_content .= plugins_url( 'images/twitter-for-dark.png' , __FILE__ );
+            } else {
+                $widget_content .= plugins_url( 'images/twitter-for-light.png' , __FILE__ );
+            }
+            $widget_content .= '" alt="Share to Twitter" /></a>';
+            $count++;
         }
 
         if ( $use_facebook ) {
-            echo '<a class="wp_widget_plugin_text" target="_blank" href="https://facebook.com/sharer.php?u=' . $post_url . '" title="Share to Facebook"><img src="' . plugins_url( 'images/facebook-for-dark.png' , __FILE__ ) . '" alt="Share to Facebook" /></a>';
+            $widget_content .= '<a class="wp_widget_plugin_text" target="_blank" href="https://facebook.com/sharer.php?u=' . $post_url . '" title="Share to Facebook"><img src="';
+            if ( $icon_color ==  'light' ) {
+                $widget_content .= plugins_url( 'images/facebook-for-dark.png' , __FILE__ );
+            } else {
+                $widget_content .= plugins_url( 'images/facebook-for-light.png' , __FILE__ );
+            }
+            $widget_content .= '" alt="Share to Facebook" /></a>';
+            $count++;
         }
 
-        //if ($icon_color == 'light') {
-            //echo '<a class="wp_widget_plugin_text" target="_blank" href="https://twitter.com/intent/tweet?url=' . $post_url . '&text=%22' . $post_title . '%22&via=' . $twitter_account . '" title="Share to Twitter"><img src="' . plugins_url( 'images/twitter-for-dark.png' , __FILE__ ) . '" alt="Share to Twitter" /></a>';
-            //echo '<a class="wp_widget_plugin_text" target="_blank" href="https://facebook.com/sharer.php?u=' . $post_url . '" title="Share to Facebook"><img src="' . plugins_url( 'images/facebook-for-dark.png' , __FILE__ ) . '" alt="Share to Facebook" /></a>';
-            //echo '<a class="wp_widget_plugin_text" target="_blank" href="https://plus.google.com/share?url=' . $post_url . '" title="Share to Google Plus"><img src="' . plugins_url( 'images/google-plus.png' , __FILE__ ) . '" alt="Share to Google Plus" /></a>';
-            //echo '<a class="wp_widget_plugin_text" target="_blank" href="http://pinterest.com/pin/create/button/?url=' . $post_url . '&description=' . $post_title . '" title="Pin on Pinterest"><img src="' . plugins_url( 'images/pinterest-for-dark.png' , __FILE__ ) . '" alt="Pin on Pinterest" /></a>';
-        //} elseif ($icon_color == 'dark') {
-            //echo '<a class="wp_widget_plugin_text" target="_blank" href="https://twitter.com/intent/tweet?url=' . $post_url . '&text=%22' . $post_title . '%22&via=' . $twitter_account . '" title="Share to Twitter"><img src="' . plugins_url( 'images/twitter-for-light.png' , __FILE__ ) . '" alt="Share to Twitter" /></a>';
-            //echo '<a class="wp_widget_plugin_text" target="_blank" href="https://facebook.com/sharer.php?u=' . $post_url . '" title="Share to Facebook"><img src="' . plugins_url( 'images/facebook-for-light.png' , __FILE__ ) . '" alt="Share to Facebook" /></a>';
-            //echo '<a class="wp_widget_plugin_text" target="_blank" href="https://plus.google.com/share?url=' . $post_url . '" title="Share to Google Plus"><img src="' . plugins_url( 'images/google-plus.png' , __FILE__ ) . '" alt="Share to Google Plus" /></a>';
-            //echo '<a class="wp_widget_plugin_text" target="_blank" href="http://pinterest.com/pin/create/button/?url=' . $post_url . '&description=' . $post_title . '" title="Pin on Pinterest"><img src="' . plugins_url( 'images/pinterest-for-light.png' , __FILE__ ) . '" alt="Pin on Pinterest" /></a>';
-        //}
-        echo '</div></div>';
+        if ( $use_google_plus ) {
+            $widget_content .= '<a class="wp_widget_plugin_text" target="_blank" href="https://plus.google.com/share?url=' . $post_url . '" title="Share to Google Plus"><img src="' . plugins_url( 'images/google-plus.png' , __FILE__ ) . '" alt="Share to Google Plus" /></a>';
+            $count++;
+        }
+
+        if ( $use_pinterest ) {
+            $widget_content .= '<a class="wp_widget_plugin_text" target="_blank" href="http://pinterest.com/pin/create/button/?url=' . $post_url . '&description=' . $post_title . '" title="Pin on Pinterest"><img src="';
+            if ( $icon_color == 'light' ) {
+                $widget_content .= plugins_url( 'images/pinterest-for-dark.png' , __FILE__ );
+            } else {
+                $widget_content .= plugins_url( 'images/pinterest-for-light.png' , __FILE__ );
+            }
+            $widget_content .= '" alt="Pin on Pinterest" /></a>';
+            $count++;
+        }
+
+        if ( $use_email ) {
+            $widget_content .= '<a class="wp_widget_plugin_text" target="_blank" href="mailto:?subject=I%20am%20Sharing%20A%20Webpage%20With%20You%20From%20joshbroton.com&body=%3Ca%20href%3D%22' . $post_url . '%22%3E' . $post_title . '%3C%2Fa%3E" title="Send via email"><img src="';
+            if ( $icon_color == 'light' ) {
+                $widget_content .= plugins_url( 'images/email-for-dark.png' , __FILE__ );
+            } else {
+                $widget_content .= plugins_url( 'images/email-for-light.png' , __FILE__ );
+            }
+            $widget_content .= '" alt="Send via Email" /></a>';
+            $count++;
+        }
+
+        if ( $use_linkedin ) {
+            $widget_content .= '<a class="wp_widget_plugin_text" target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=' . $post_url . '" title="Share on LinkedIn"><img src="' . plugins_url( 'images/linkedin.png' , __FILE__ ) . '" alt="Share on LinkedIn" /></a>';
+            $count++;
+        }
+
+        if ( $use_digg ) {
+            $widget_content .= '<a class="wp_widget_plugin_text" target="_blank" href="http://digg.com/submit?url=' . $post_url . '" title="Digg This"><img src="';
+            if ( $icon_color == 'light' ) {
+                $widget_content .= plugins_url( 'images/digg-for-dark.png' , __FILE__ );
+            } else {
+                $widget_content .= plugins_url( 'images/digg-for-light.png' , __FILE__ );
+            }
+            $widget_content .= '" alt="Digg This" /></a>';
+            $count++;
+        }
+
+        if ( $use_reddit ) {
+            $widget_content .= '<a class="wp_widget_plugin_text" target="_blank" href="http://reddit.com/submit?url=' . $post_url . '&title=' . $post_title . '" title="Share on Reddit"><img src="' . plugins_url( 'images/reddit.png' , __FILE__ ) . '" alt="Share on Reddit" /></a>';
+            $count++;
+        }
+
+        // Output content
+        echo '<div class="clean-share-links count_' . $count . '">';
+        echo $widget_content . '</div></div>';
         echo $after_widget;
 	}
 }

@@ -33,10 +33,11 @@
         float: left;
         width: 22%;
         margin-right: 4%;
+        margin-bottom: 4%;
         @include opacity(.8);
         @include transition(opacity .2s ease);
 
-        &:last-child {
+        &:nth-child(4n+4) {
             margin-right: 0;
         }
 
