@@ -23,3 +23,5 @@
     .clean-share-links a:hover {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
       opacity: 1; }
+    .clean-share-links a img {
+      width: 100%; }

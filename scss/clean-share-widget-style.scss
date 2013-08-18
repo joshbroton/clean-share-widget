@@ -44,5 +44,9 @@
         &:hover {
             @include opacity(1);
         }
+
+		img {
+			width: 100%;
+		}
     }
 }
