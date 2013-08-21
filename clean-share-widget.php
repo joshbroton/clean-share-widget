@@ -3,7 +3,7 @@
 Plugin Name: Clean Social Share Widget
 Plugin URI: http://github.com/joshbroton/clean-share-widget
 Description: A fast and JavaScript-free social share widget.
-Version: 0.2
+Version: 0.2.1
 Author: Josh Broton
 Author URI: http://joshbroton.com
 License: GPL2

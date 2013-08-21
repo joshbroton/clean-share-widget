@@ -9,6 +9,10 @@ You lose tracking, but basic tracking will be added in the future (do you really
 License: GPLv2
 
 
+###v0.2.1
+* Add width:100% to images. Corrects sizing issues if the theme isn't responsive.
+
+
 ###v0.2
 * Add sharing to email, LinkedIn, Digg, and reddit
 * Users can disable unwanted social networks
