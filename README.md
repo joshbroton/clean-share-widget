@@ -6,6 +6,8 @@ I am sick of social share widgets doubling the time it takes my site to load. Th
 
 You lose tracking, but basic tracking will be added in the future (do you really look at your tracking, anyway?).
 
+Install: Download the .zip file and install via WordPress admin.
+
 License: GPLv2
 
 
